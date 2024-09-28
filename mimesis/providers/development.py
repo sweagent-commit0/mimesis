@@ -1,19 +1,9 @@
 """Data related to the development."""
-
 import typing as t
 from datetime import datetime
-
-from mimesis.datasets import (
-    LICENSES,
-    OS,
-    PROGRAMMING_LANGS,
-    STAGES,
-    SYSTEM_QUALITY_ATTRIBUTES,
-)
+from mimesis.datasets import LICENSES, OS, PROGRAMMING_LANGS, STAGES, SYSTEM_QUALITY_ATTRIBUTES
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["Development"]
-
+__all__ = ['Development']
 
 class Development(BaseProvider):
     """Class for getting fake data for Developers."""
@@ -22,7 +12,7 @@ class Development(BaseProvider):
         super().__init__(*args, **kwargs)
 
     class Meta:
-        name = "development"
+        name = 'development'
 
     def software_license(self) -> str:
         """Generates a random software license.
@@ -32,7 +22,7 @@ class Development(BaseProvider):
         :Example:
             The BSD 3-Clause License.
         """
-        return self.random.choice(LICENSES)
+        pass
 
     def calver(self) -> str:
         """Generates a random calendar versioning string.
@@ -42,10 +32,7 @@ class Development(BaseProvider):
         :Example:
             2016.11.08
         """
-        year = self.random.randint(2016, datetime.now().year)
-        month = self.random.randint(1, 12)
-        day = self.random.randint(1, 29)
-        return f"{year}.{month}.{day}"
+        pass
 
     def version(self) -> str:
         """Generates a random semantic versioning string.
@@ -55,8 +42,7 @@ class Development(BaseProvider):
         :Example:
             0.2.1
         """
-        major, minor, patch = self.random.randints(n=3, a=0, b=100)
-        return f"{major}.{minor}.{patch}"
+        pass
 
     def stage(self) -> str:
         """Generates a random stage of development.
@@ -66,7 +52,7 @@ class Development(BaseProvider):
         :Example:
             Alpha.
         """
-        return self.random.choice(STAGES)
+        pass
 
     def programming_language(self) -> str:
         """Generates a random programming language from the list.
@@ -76,7 +62,7 @@ class Development(BaseProvider):
         :Example:
             Erlang.
         """
-        return self.random.choice(PROGRAMMING_LANGS)
+        pass
 
     def os(self) -> str:
         """Generates a random operating system or distributive name.
@@ -86,14 +72,14 @@ class Development(BaseProvider):
         :Example:
             Gentoo
         """
-        return self.random.choice(OS)
+        pass
 
     def boolean(self) -> bool:
         """Generates a random boolean value.
 
         :return: True of False.
         """
-        return self.random.choice([True, False])
+        pass
 
     def system_quality_attribute(self) -> str:
         """Generates a random system quality attribute.
@@ -105,11 +91,11 @@ class Development(BaseProvider):
 
         :return: System quality attribute.
         """
-        return self.random.choice(SYSTEM_QUALITY_ATTRIBUTES)
+        pass
 
     def ility(self) -> str:
         """Generates a random system quality attribute.
 
         An alias for :meth:`~mimesis.Development.system_quality_attribute`.
         """
-        return self.system_quality_attribute()
+        pass

@@ -1,34 +1,24 @@
 """Provider of data related to date and time."""
-
 import typing as t
 from calendar import monthrange
 from datetime import date, datetime, time, timedelta
-
 from mimesis.compat import pytz
 from mimesis.datasets import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time
-
-__all__ = ["Datetime"]
-
+__all__ = ['Datetime']
 
 class Datetime(BaseDataProvider):
     """Class for generating data related to the date and time."""
-
-    # See: https://git.io/Jf15A
     _CURRENT_YEAR = datetime.now().year
 
     class Meta:
-        name = "datetime"
-        datafile = f"{name}.json"
+        name = 'datetime'
+        datafile = f'{name}.json'
 
     @staticmethod
-    def bulk_create_datetimes(
-        date_start: DateTime,
-        date_end: DateTime,
-        **kwargs: t.Any,
-    ) -> list[DateTime]:
+    def bulk_create_datetimes(date_start: DateTime, date_end: DateTime, **kwargs: t.Any) -> list[DateTime]:
         """Bulk create datetime objects.
 
         This method creates a list of datetime objects from
@@ -60,92 +50,66 @@ class Datetime(BaseDataProvider):
             when ``date_start`` larger than ``date_end`` or when the given
             keywords for `datetime.timedelta` represent a non-positive timedelta.
         """
-        dt_objects = []
+        pass
 
-        if not date_start and not date_end:
-            raise ValueError("You must pass date_start and date_end")
-
-        if date_end < date_start:
-            raise ValueError("date_start can not be larger than date_end")
-
-        if timedelta(**kwargs) <= timedelta():
-            raise ValueError("timedelta must be positive")
-
-        while date_start <= date_end:
-            date_start += timedelta(**kwargs)
-            dt_objects.append(date_start)
-
-        return dt_objects
-
-    def week_date(self, start: int = 2017, end: int = _CURRENT_YEAR) -> str:
+    def week_date(self, start: int=2017, end: int=_CURRENT_YEAR) -> str:
         """Generates week number with year.
 
         :param start: Starting year.
         :param end: Ending year.
         :return: Week number.
         """
-        year = self.year(start, end)
-        week = self.random.randint(1, 52)
-        return f"{year}-W{week}"
+        pass
 
-    def day_of_week(self, abbr: bool = False) -> str:
+    def day_of_week(self, abbr: bool=False) -> str:
         """Generates a random day of the week.
 
         :param abbr: Abbreviated day name.
         :return: Day of the week.
         """
-        key = "abbr" if abbr else "name"
-        days: list[str] = self._extract(["day", key])
-        return self.random.choice(days)
+        pass
 
-    def month(self, abbr: bool = False) -> str:
+    def month(self, abbr: bool=False) -> str:
         """Generates a random month of the year.
 
         :param abbr: Abbreviated month name.
         :return: Month name.
         """
-        key = "abbr" if abbr else "name"
-        months: list[str] = self._extract(["month", key])
-        return self.random.choice(months)
+        pass
 
-    def year(self, minimum: int = 1990, maximum: int = _CURRENT_YEAR) -> int:
+    def year(self, minimum: int=1990, maximum: int=_CURRENT_YEAR) -> int:
         """Generates a random year.
 
         :param minimum: Minimum value.
         :param maximum: Maximum value.
         :return: Year.
         """
-        return self.random.randint(minimum, maximum)
+        pass
 
     def century(self) -> str:
         """Generates a random century.
 
         :return: Century.
         """
-        return self.random.choice(ROMAN_NUMS)
+        pass
 
     def periodicity(self) -> str:
         """Generates a random periodicity string.
 
         :return: Periodicity.
         """
-        periodicity: list[str] = self._extract(["periodicity"])
-        return self.random.choice(periodicity)
+        pass
 
-    def date(self, start: int = 2000, end: int = _CURRENT_YEAR) -> Date:
+    def date(self, start: int=2000, end: int=_CURRENT_YEAR) -> Date:
         """Generates a random date object.
 
         :param start: Minimum value of year.
         :param end: Maximum value of year.
         :return: Formatted date.
         """
-        year = self.random.randint(start, end)
-        month = self.random.randint(1, 12)
-        day = self.random.randint(1, monthrange(year, month)[1])
-        date_object = date(year, month, day)
-        return date_object
+        pass
 
-    def formatted_date(self, fmt: str = "", **kwargs: t.Any) -> str:
+    def formatted_date(self, fmt: str='', **kwargs: t.Any) -> str:
         """Generates random date as string.
 
         :param fmt: The format of date, if None then use standard
@@ -153,70 +117,47 @@ class Datetime(BaseDataProvider):
         :param kwargs: Keyword arguments for :meth:`~.date()`
         :return: Formatted date.
         """
-        date_obj = self.date(**kwargs)
-
-        if not fmt:
-            fmt = self._extract(["formats", "date"])
-
-        return date_obj.strftime(fmt)
+        pass
 
     def time(self) -> Time:
         """Generates a random time object.
 
         :return: ``datetime.time`` object.
         """
-        random_time = time(
-            self.random.randint(0, 23),
-            self.random.randint(0, 59),
-            self.random.randint(0, 59),
-            self.random.randint(0, 999999),
-        )
-        return random_time
+        pass
 
-    def formatted_time(self, fmt: str = "") -> str:
+    def formatted_time(self, fmt: str='') -> str:
         """Generates formatted time as string.
 
         :param fmt: The format of time, if None then use standard
             accepted in the current locale.
         :return: String formatted time.
         """
-        time_obj = self.time()
-
-        if not fmt:
-            fmt = self._extract(["formats", "time"])
-        return time_obj.strftime(fmt)
+        pass
 
     def day_of_month(self) -> int:
         """Generates a random day of the month, from 1 to 31.
 
         :return: Random value from 1 to 31.
         """
-        return self.random.randint(1, 31)
+        pass
 
-    def timezone(self, region: TimezoneRegion | None = None) -> str:
+    def timezone(self, region: TimezoneRegion | None=None) -> str:
         """Generates a random timezone.
 
         :param region: Timezone region.
         :return: Timezone.
         """
-        region_name = self.validate_enum(region, TimezoneRegion)
-        return self.random.choice(
-            [tz for tz in TIMEZONES if tz.startswith(region_name)]
-        )
+        pass
 
     def gmt_offset(self) -> str:
         """Generates a random GMT offset value.
 
         :return: GMT Offset.
         """
-        return self.random.choice(GMT_OFFSETS)
+        pass
 
-    def datetime(
-        self,
-        start: int = _CURRENT_YEAR,
-        end: int = _CURRENT_YEAR,
-        timezone: str | None = None,
-    ) -> DateTime:
+    def datetime(self, start: int=_CURRENT_YEAR, end: int=_CURRENT_YEAR, timezone: str | None=None) -> DateTime:
         """Generates random datetime.
 
         :param start: Minimum value of year.
@@ -224,37 +165,18 @@ class Datetime(BaseDataProvider):
         :param timezone: Set custom timezone (pytz required).
         :return: Datetime
         """
-        datetime_obj = datetime.combine(
-            date=self.date(start, end),
-            time=self.time(),
-        )
-        if timezone:
-            if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
-            tz = pytz.timezone(timezone)
-            datetime_obj = tz.localize(datetime_obj)
+        pass
 
-        return datetime_obj
-
-    def formatted_datetime(self, fmt: str = "", **kwargs: t.Any) -> str:
+    def formatted_datetime(self, fmt: str='', **kwargs: t.Any) -> str:
         """Generates datetime string in human-readable format.
 
         :param fmt: Custom format (default is format for current locale)
         :param kwargs: Keyword arguments for :meth:`~.datetime()`
         :return: Formatted datetime string.
         """
-        dt_obj = self.datetime(**kwargs)
+        pass
 
-        if not fmt:
-            date_fmt = self._extract(["formats", "date"])
-            time_fmt = self._extract(["formats", "time"])
-            fmt = f"{date_fmt} {time_fmt}"
-
-        return dt_obj.strftime(fmt)
-
-    def timestamp(
-        self, fmt: TimestampFormat = TimestampFormat.POSIX, **kwargs: t.Any
-    ) -> str | int:
+    def timestamp(self, fmt: TimestampFormat=TimestampFormat.POSIX, **kwargs: t.Any) -> str | int:
         """Generates a random timestamp in given format.
 
         Supported formats are:
@@ -279,22 +201,9 @@ class Datetime(BaseDataProvider):
         :param kwargs: Kwargs for :meth:`~.datetime()`.
         :return: Timestamp.
         """
-        self.validate_enum(fmt, TimestampFormat)
-        stamp = self.datetime(**kwargs)
+        pass
 
-        if fmt == TimestampFormat.RFC_3339:
-            return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
-        elif fmt == TimestampFormat.ISO_8601:
-            return stamp.isoformat()
-        else:
-            return int(stamp.timestamp())
-
-    def duration(
-        self,
-        min_duration: int = 1,
-        max_duration: int = 10,
-        duration_unit: DurationUnit | None = DurationUnit.MINUTES,
-    ) -> timedelta:
+    def duration(self, min_duration: int=1, max_duration: int=10, duration_unit: DurationUnit | None=DurationUnit.MINUTES) -> timedelta:
         """Generate a random duration.
 
         The default duration unit is Duration.MINUTES.
@@ -310,11 +219,4 @@ class Datetime(BaseDataProvider):
         :param duration_unit: Duration unit.
         :return: Duration as timedelta.
         """
-        if min_duration > max_duration:
-            raise ValueError("min_duration must be less or equal to max_duration")
-
-        if not isinstance(min_duration, int) or not isinstance(max_duration, int):
-            raise TypeError("min_duration and max_duration must be integers")
-
-        unit = self.validate_enum(duration_unit, DurationUnit)
-        return timedelta(**{unit: self.random.randint(min_duration, max_duration)})
+        pass

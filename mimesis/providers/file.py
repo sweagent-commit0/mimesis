@@ -1,19 +1,16 @@
 """File data provider."""
-
 from mimesis.datasets import EXTENSIONS, FILENAMES, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["File"]
-
+__all__ = ['File']
 
 class File(BaseProvider):
     """Class for generate data related to files."""
 
     class Meta:
-        name = "file"
+        name = 'file'
 
-    def extension(self, file_type: FileType | None = None) -> str:
+    def extension(self, file_type: FileType | None=None) -> str:
         """Generates a random file extension.
 
         :param file_type: Enum object FileType.
@@ -22,21 +19,17 @@ class File(BaseProvider):
         :Example:
             .py
         """
-        key = self.validate_enum(item=file_type, enum=FileType)
-        extensions = EXTENSIONS[key]
-        return self.random.choice(extensions)
+        pass
 
-    def mime_type(self, type_: MimeType | None = None) -> str:
+    def mime_type(self, type_: MimeType | None=None) -> str:
         """Generates a random mime type.
 
         :param type_: Enum object MimeType.
         :return: Mime type.
         """
-        key = self.validate_enum(item=type_, enum=MimeType)
-        types = MIME_TYPES[key]
-        return self.random.choice(types)
+        pass
 
-    def size(self, minimum: int = 1, maximum: int = 100) -> str:
+    def size(self, minimum: int=1, maximum: int=100) -> str:
         """Generates a random file size as string.
 
         :param minimum: Maximum value.
@@ -46,11 +39,9 @@ class File(BaseProvider):
         :Example:
             56 kB
         """
-        num = self.random.randint(minimum, maximum)
-        unit = self.random.choice(["bytes", "kB", "MB", "GB", "TB"])
-        return f"{num} {unit}"
+        pass
 
-    def file_name(self, file_type: FileType | None = None) -> str:
+    def file_name(self, file_type: FileType | None=None) -> str:
         """Generates a random file name with an extension.
 
         :param file_type: Enum object FileType
@@ -59,6 +50,4 @@ class File(BaseProvider):
         :Example:
             legislative.txt
         """
-        ext = self.extension(file_type)
-        name = self.random.choice(FILENAMES)
-        return f"{name}{ext}"
+        pass

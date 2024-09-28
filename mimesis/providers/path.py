@@ -1,30 +1,15 @@
 """Provides data related to paths."""
-
 import sys
 import typing as t
 from pathlib import PurePosixPath, PureWindowsPath
-
-from mimesis.datasets import (
-    FOLDERS,
-    PLATFORMS,
-    PROGRAMMING_LANGS,
-    PROJECT_NAMES,
-    USERNAMES,
-)
+from mimesis.datasets import FOLDERS, PLATFORMS, PROGRAMMING_LANGS, PROJECT_NAMES, USERNAMES
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["Path"]
-
+__all__ = ['Path']
 
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(
-        self,
-        platform: str = sys.platform,
-        *args: t.Any,
-        **kwargs: t.Any,
-    ) -> None:
+    def __init__(self, platform: str=sys.platform, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         Supported platforms: 'linux', 'darwin', 'win32', 'win64', 'freebsd'.
@@ -32,14 +17,14 @@ class Path(BaseProvider):
         :param platform: Required platform type.
         """
         super().__init__(*args, **kwargs)
-        if platform.startswith("freebsd"):
-            platform = "freebsd"
+        if platform.startswith('freebsd'):
+            platform = 'freebsd'
         self.platform = platform
-        self._pathlib_home = PureWindowsPath() if "win" in platform else PurePosixPath()
-        self._pathlib_home /= PLATFORMS[platform]["home"]
+        self._pathlib_home = PureWindowsPath() if 'win' in platform else PurePosixPath()
+        self._pathlib_home /= PLATFORMS[platform]['home']
 
     class Meta:
-        name = "path"
+        name = 'path'
 
     def root(self) -> str:
         """Generates a root dir path.
@@ -49,7 +34,7 @@ class Path(BaseProvider):
         :Example:
             /
         """
-        return str(self._pathlib_home.parent)
+        pass
 
     def home(self) -> str:
         """Generates a home path.
@@ -59,7 +44,7 @@ class Path(BaseProvider):
         :Example:
             /home
         """
-        return str(self._pathlib_home)
+        pass
 
     def user(self) -> str:
         """Generates a random user.
@@ -69,9 +54,7 @@ class Path(BaseProvider):
         :Example:
             /home/oretha
         """
-        user = self.random.choice(USERNAMES)
-        user = user.capitalize() if "win" in self.platform else user.lower()
-        return str(self._pathlib_home / user)
+        pass
 
     def users_folder(self) -> str:
         """Generates a random path to user's folders.
@@ -81,9 +64,7 @@ class Path(BaseProvider):
         :Example:
             /home/taneka/Pictures
         """
-        user = self.user()
-        folder = self.random.choice(FOLDERS)
-        return str(self._pathlib_home / user / folder)
+        pass
 
     def dev_dir(self) -> str:
         """Generates a random path to development directory.
@@ -93,10 +74,7 @@ class Path(BaseProvider):
         :Example:
             /home/sherrell/Development/Python
         """
-        user = self.user()
-        folder = self.random.choice(["Development", "Dev"])
-        stack = self.random.choice(PROGRAMMING_LANGS)
-        return str(self._pathlib_home / user / folder / stack)
+        pass
 
     def project_dir(self) -> str:
         """Generates a random path to project directory.
@@ -106,6 +84,4 @@ class Path(BaseProvider):
         :Example:
             /home/sherika/Development/Falcon/mercenary
         """
-        dev_dir = self.dev_dir()
-        project = self.random.choice(PROJECT_NAMES)
-        return str(self._pathlib_home / dev_dir / project)
+        pass

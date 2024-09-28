@@ -1,21 +1,17 @@
 """Cryptographic data provider."""
-
 import hashlib
 import secrets
 from uuid import UUID, uuid4
-
 from mimesis.datasets.int.cryptographic import WORDLIST
 from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["Cryptographic"]
-
+__all__ = ['Cryptographic']
 
 class Cryptographic(BaseProvider):
     """Class that provides cryptographic data."""
 
     class Meta:
-        name = "cryptographic"
+        name = 'cryptographic'
 
     @staticmethod
     def uuid_object() -> UUID:
@@ -23,16 +19,16 @@ class Cryptographic(BaseProvider):
 
         :return: UUID4 object.
         """
-        return uuid4()
+        pass
 
     def uuid(self) -> str:
         """Generates UUID4 string.
 
         :return: UUID4 as string.
         """
-        return str(self.uuid_object())
+        pass
 
-    def hash(self, algorithm: Algorithm | None = None) -> str:  # noqa: A003
+    def hash(self, algorithm: Algorithm | None=None) -> str:
         """Generates random hash.
 
         To change hashing algorithm, pass parameter ``algorithm``
@@ -45,13 +41,10 @@ class Cryptographic(BaseProvider):
         :return: Hash.
         :raises NonEnumerableError: When algorithm is unsupported.
         """
-        key = self.validate_enum(algorithm, Algorithm)
-        func = getattr(hashlib, key)
-        value = func(self.uuid().encode())
-        return str(value.hexdigest())
+        pass
 
     @staticmethod
-    def token_bytes(entropy: int = 32) -> bytes:
+    def token_bytes(entropy: int=32) -> bytes:
         """Generates byte string containing ``entropy`` bytes.
 
         The string has ``entropy`` random bytes, each byte
@@ -63,10 +56,10 @@ class Cryptographic(BaseProvider):
         :param entropy: Number of bytes (default: 32).
         :return: Random bytes.
         """
-        return secrets.token_bytes(entropy)
+        pass
 
     @staticmethod
-    def token_hex(entropy: int = 32) -> str:
+    def token_hex(entropy: int=32) -> str:
         """Generates a random text string, in hexadecimal.
 
         The string has *entropy* random bytes, each byte converted to two
@@ -79,10 +72,10 @@ class Cryptographic(BaseProvider):
         :param entropy: Number of bytes (default: 32).
         :return: Token.
         """
-        return secrets.token_hex(entropy)
+        pass
 
     @staticmethod
-    def token_urlsafe(entropy: int = 32) -> str:
+    def token_urlsafe(entropy: int=32) -> str:
         """Generates a random URL-safe text string, in Base64 encoding.
 
         The string has *entropy* random bytes.  If *entropy* is ``None``
@@ -94,13 +87,11 @@ class Cryptographic(BaseProvider):
         :param entropy: Number of bytes (default: 32).
         :return: URL-safe token.
         """
-        return secrets.token_urlsafe(entropy)
+        pass
 
     def mnemonic_phrase(self) -> str:
         """Generates BIP-39 looking mnemonic phrase.
 
         :return: Mnemonic phrase.
         """
-        length = self.random.choice([12, 24])
-        phrases = self.random.choices(WORDLIST, k=length)
-        return " ".join(phrases)
+        pass

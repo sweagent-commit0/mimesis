@@ -1,21 +1,17 @@
 """Provides data related to food."""
-
 from mimesis.providers.base import BaseDataProvider
-
-__all__ = ["Food"]
-
+__all__ = ['Food']
 
 class Food(BaseDataProvider):
     """Class for generating data related to food."""
 
     class Meta:
-        name = "food"
-        datafile = f"{name}.json"
+        name = 'food'
+        datafile = f'{name}.json'
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data: list[str] = self._extract([key])
-        return self.random.choice(data)
+        pass
 
     def vegetable(self) -> str:
         """Generates a random vegetable name.
@@ -25,7 +21,7 @@ class Food(BaseDataProvider):
         :Example:
             Tomato.
         """
-        return self._choice_from("vegetables")
+        pass
 
     def fruit(self) -> str:
         """Generates a random fruit or berry name.
@@ -35,7 +31,7 @@ class Food(BaseDataProvider):
         :Example:
             Banana.
         """
-        return self._choice_from("fruits")
+        pass
 
     def dish(self) -> str:
         """Generates a random dish name.
@@ -45,7 +41,7 @@ class Food(BaseDataProvider):
         :Example:
             Ratatouille.
         """
-        return self._choice_from("dishes")
+        pass
 
     def spices(self) -> str:
         """Generates a random spices/herb name.
@@ -55,7 +51,7 @@ class Food(BaseDataProvider):
         :Example:
             Anise.
         """
-        return self._choice_from("spices")
+        pass
 
     def drink(self) -> str:
         """Generates a random drink name.
@@ -65,4 +61,4 @@ class Food(BaseDataProvider):
         :Example:
             Vodka.
         """
-        return self._choice_from("drinks")
+        pass

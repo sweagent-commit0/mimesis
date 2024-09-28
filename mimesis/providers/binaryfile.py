@@ -1,19 +1,9 @@
 """Binary data provider."""
-
 import typing as t
-
 from mimesis.constants import DATADIR
-from mimesis.enums import (
-    AudioFile,
-    CompressedFile,
-    DocumentFile,
-    ImageFile,
-    VideoFile,
-)
+from mimesis.enums import AudioFile, CompressedFile, DocumentFile, ImageFile, VideoFile
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["BinaryFile"]
-
+__all__ = ['BinaryFile']
 
 class BinaryFile(BaseProvider):
     """Class for generating binary data"""
@@ -27,20 +17,9 @@ class BinaryFile(BaseProvider):
         super().__init__(*args, **kwargs)
 
     class Meta:
-        name = "binaryfile"
+        name = 'binaryfile'
 
-    def _read_file(
-        self,
-        *,
-        file_type: AudioFile | CompressedFile | DocumentFile | ImageFile | VideoFile,
-    ) -> bytes:
-        file_type = self.validate_enum(file_type, file_type.__class__)
-        file_path = DATADIR / "bin" / f"sample.{file_type}"
-
-        with open(file_path, "rb") as file:
-            return file.read()
-
-    def video(self, *, file_type: VideoFile = VideoFile.MP4) -> bytes:
+    def video(self, *, file_type: VideoFile=VideoFile.MP4) -> bytes:
         """Generates video file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
@@ -48,9 +27,9 @@ class BinaryFile(BaseProvider):
         :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(file_type=file_type)
+        pass
 
-    def audio(self, *, file_type: AudioFile = AudioFile.MP3) -> bytes:
+    def audio(self, *, file_type: AudioFile=AudioFile.MP3) -> bytes:
         """Generates an audio file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
@@ -58,9 +37,9 @@ class BinaryFile(BaseProvider):
         :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(file_type=file_type)
+        pass
 
-    def document(self, *, file_type: DocumentFile = DocumentFile.PDF) -> bytes:
+    def document(self, *, file_type: DocumentFile=DocumentFile.PDF) -> bytes:
         """Generates a document of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
@@ -68,9 +47,9 @@ class BinaryFile(BaseProvider):
         :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(file_type=file_type)
+        pass
 
-    def image(self, *, file_type: ImageFile = ImageFile.PNG) -> bytes:
+    def image(self, *, file_type: ImageFile=ImageFile.PNG) -> bytes:
         """Generates an image of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
@@ -78,9 +57,9 @@ class BinaryFile(BaseProvider):
         :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(file_type=file_type)
+        pass
 
-    def compressed(self, *, file_type: CompressedFile = CompressedFile.ZIP) -> bytes:
+    def compressed(self, *, file_type: CompressedFile=CompressedFile.ZIP) -> bytes:
         """Generates a compressed file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
@@ -88,4 +67,4 @@ class BinaryFile(BaseProvider):
         :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(file_type=file_type)
+        pass

@@ -1,12 +1,9 @@
 """Provides data related to text."""
 import typing as t
-
 from mimesis.datasets import SAFE_COLORS
 from mimesis.enums import EmojyCategory
 from mimesis.providers.base import BaseDataProvider
-
-__all__ = ["Text"]
-
+__all__ = ['Text']
 
 class Text(BaseDataProvider):
     """Class for generating text data."""
@@ -14,22 +11,19 @@ class Text(BaseDataProvider):
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes."""
         super().__init__(*args, **kwargs)
-        self._emojis = self._read_global_file("emojis.json")
+        self._emojis = self._read_global_file('emojis.json')
 
     class Meta:
-        name = "text"
-        datafile = f"{name}.json"
+        name = 'text'
+        datafile = f'{name}.json'
 
-    def alphabet(self, lower_case: bool = False) -> list[str]:
+    def alphabet(self, lower_case: bool=False) -> list[str]:
         """Returns an alphabet for current locale.
 
         :param lower_case: Return alphabet in lower case.
         :return: Alphabet.
         """
-        case = "uppercase" if not lower_case else "lowercase"
-
-        alpha: list[str] = self._extract(["alphabet", case])
-        return alpha
+        pass
 
     def level(self) -> str:
         """Generates a word that indicates a level of something.
@@ -39,33 +33,31 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels: list[str] = self._extract(["level"])
-        return self.random.choice(levels)
+        pass
 
-    def text(self, quantity: int = 5) -> str:
+    def text(self, quantity: int=5) -> str:
         """Generates the text.
 
         :param quantity: Quantity of sentences.
         :return: Text.
         """
-        text = self._extract(["text"])
-        return " ".join(self.random.choices(text, k=quantity))
+        pass
 
     def sentence(self) -> str:
         """Generates a random sentence from the text.
 
         :return: Sentence.
         """
-        return self.text(quantity=1)
+        pass
 
     def title(self) -> str:
         """Generates a random title.
 
         :return: The title.
         """
-        return self.text(quantity=1)
+        pass
 
-    def words(self, quantity: int = 5) -> list[str]:
+    def words(self, quantity: int=5) -> list[str]:
         """Generates a list of random words.
 
         :param quantity: Quantity of words. Default is 5.
@@ -74,8 +66,7 @@ class Text(BaseDataProvider):
         :Example:
             [science, network, god, octopus, love]
         """
-        words = self._extract(["words"])
-        return self.random.choices(words, k=quantity)
+        pass
 
     def word(self) -> str:
         """Generates a random word.
@@ -85,7 +76,7 @@ class Text(BaseDataProvider):
         :Example:
             Science.
         """
-        return self.words(quantity=1)[0]
+        pass
 
     def quote(self) -> str:
         """Generates a random quote.
@@ -95,8 +86,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes: list[str] = self._extract(["quotes"])
-        return self.random.choice(quotes)
+        pass
 
     def color(self) -> str:
         """Generates a random color name.
@@ -106,8 +96,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors: list[str] = self._extract(["color"])
-        return self.random.choice(colors)
+        pass
 
     @staticmethod
     def _hex_to_rgb(color: str) -> tuple[int, ...]:
@@ -116,10 +105,9 @@ class Text(BaseDataProvider):
         :param color: Hex color.
         :return: RGB tuple.
         """
-        color = color.lstrip("#") if color.startswith("#") else color
-        return tuple(int(color[i : i + 2], 16) for i in (0, 2, 4))
+        pass
 
-    def hex_color(self, safe: bool = False) -> str:
+    def hex_color(self, safe: bool=False) -> str:
         """Generates a random HEX color.
 
         :param safe: Get safe Flat UI hex color.
@@ -128,12 +116,9 @@ class Text(BaseDataProvider):
         :Example:
             #d8346b
         """
-        if safe:
-            return self.random.choice(SAFE_COLORS)
+        pass
 
-        return f"#{self.random.randint(0x000000, 0xFFFFFF):06x}"
-
-    def rgb_color(self, safe: bool = False) -> tuple[int, ...]:
+    def rgb_color(self, safe: bool=False) -> tuple[int, ...]:
         """Generates a random RGB color tuple.
 
         :param safe: Get safe RGB tuple.
@@ -142,8 +127,7 @@ class Text(BaseDataProvider):
         :Example:
             (252, 85, 32)
         """
-        color = self.hex_color(safe)
-        return self._hex_to_rgb(color)
+        pass
 
     def answer(self) -> str:
         """Generates a random answer in the current language.
@@ -153,10 +137,9 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers: list[str] = self._extract(["answers"])
-        return self.random.choice(answers)
+        pass
 
-    def emoji(self, category: EmojyCategory | None = EmojyCategory.DEFAULT) -> str:
+    def emoji(self, category: EmojyCategory | None=EmojyCategory.DEFAULT) -> str:
         """Generates a random emoji from the specified category.
 
         Generates a random emoji from the specified category.
@@ -169,11 +152,4 @@ class Text(BaseDataProvider):
         :example:
             😟
         """
-        category = self.validate_enum(category, EmojyCategory)
-        symbol = self.random.choice(self._emojis[category])
-
-        base = 16
-        # Some emoji consist of multiple Unicode characters.
-        if isinstance(symbol, list):
-            return "".join([chr(int(s, base)) for s in symbol])
-        return chr(int(symbol, base))
+        pass

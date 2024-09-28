@@ -1,30 +1,14 @@
 """Provides data related to hardware."""
-
-from mimesis.datasets import (
-    CPU,
-    CPU_CODENAMES,
-    GENERATION,
-    GRAPHICS,
-    HDD_SSD,
-    MANUFACTURERS,
-    PHONE_MODELS,
-    RAM_SIZES,
-    RAM_TYPES,
-    RESOLUTIONS,
-    SCREEN_SIZES,
-)
+from mimesis.datasets import CPU, CPU_CODENAMES, GENERATION, GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS, RAM_SIZES, RAM_TYPES, RESOLUTIONS, SCREEN_SIZES
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["Hardware"]
-
+__all__ = ['Hardware']
 
 class Hardware(BaseProvider):
     """Class for generate data related to hardware."""
 
     class Meta:
         """Class for metadata."""
-
-        name = "hardware"
+        name = 'hardware'
 
     def resolution(self) -> str:
         """Generates a random screen resolution.
@@ -34,7 +18,7 @@ class Hardware(BaseProvider):
         :Example:
             1280x720.
         """
-        return self.random.choice(RESOLUTIONS)
+        pass
 
     def screen_size(self) -> str:
         """Generates a random size of screen in inch.
@@ -44,7 +28,7 @@ class Hardware(BaseProvider):
         :Example:
             13″.
         """
-        return self.random.choice(SCREEN_SIZES)
+        pass
 
     def cpu(self) -> str:
         """Generates a random CPU name.
@@ -54,7 +38,7 @@ class Hardware(BaseProvider):
         :Example:
             Intel® Core i7.
         """
-        return self.random.choice(CPU)
+        pass
 
     def cpu_frequency(self) -> str:
         """Generates a random frequency of CPU.
@@ -64,8 +48,7 @@ class Hardware(BaseProvider):
         :Example:
             4.0 GHz.
         """
-        frequency = self.random.uniform(a=1.5, b=4.3, precision=1)
-        return f"{frequency}GHz"
+        pass
 
     def generation(self) -> str:
         """Generates a random generation.
@@ -75,7 +58,7 @@ class Hardware(BaseProvider):
         :Example:
              6th Generation.
         """
-        return self.random.choice(GENERATION)
+        pass
 
     def cpu_codename(self) -> str:
         """Generates a random CPU code name.
@@ -85,7 +68,7 @@ class Hardware(BaseProvider):
         :Example:
             Cannonlake.
         """
-        return self.random.choice(CPU_CODENAMES)
+        pass
 
     def ram_type(self) -> str:
         """Generates a random RAM type.
@@ -95,7 +78,7 @@ class Hardware(BaseProvider):
         :Example:
             DDR3.
         """
-        return self.random.choice(RAM_TYPES)
+        pass
 
     def ram_size(self) -> str:
         """Generates a random size of RAM.
@@ -105,7 +88,7 @@ class Hardware(BaseProvider):
         :Example:
             16GB.
         """
-        return self.random.choice(RAM_SIZES)
+        pass
 
     def ssd_or_hdd(self) -> str:
         """Generates a random type of disk.
@@ -115,7 +98,7 @@ class Hardware(BaseProvider):
         :Example:
             512GB SSD.
         """
-        return self.random.choice(HDD_SSD)
+        pass
 
     def graphics(self) -> str:
         """Generates a random graphics card name.
@@ -125,7 +108,7 @@ class Hardware(BaseProvider):
         :Example:
             Intel® Iris™ Pro Graphics 6200.
         """
-        return self.random.choice(GRAPHICS)
+        pass
 
     def manufacturer(self) -> str:
         """Generates a random manufacturer of hardware.
@@ -135,7 +118,7 @@ class Hardware(BaseProvider):
         :Example:
             Dell.
         """
-        return self.random.choice(MANUFACTURERS)
+        pass
 
     def phone_model(self) -> str:
         """Generates a random phone model.
@@ -145,4 +128,4 @@ class Hardware(BaseProvider):
         :Example:
             Nokia Lumia 920.
         """
-        return self.random.choice(PHONE_MODELS)
+        pass

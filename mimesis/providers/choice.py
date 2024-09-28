@@ -1,16 +1,13 @@
 """Provides a random choice from items in a sequence."""
 import typing as t
-
 from mimesis.providers.base import BaseProvider
-
-__all__ = ["Choice"]
-
+__all__ = ['Choice']
 
 class Choice(BaseProvider):
     """Class for generating a random choice from items in a sequence."""
 
     class Meta:
-        name = "choice"
+        name = 'choice'
 
     def choice(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         """Choice random item form sequence.
@@ -21,14 +18,9 @@ class Choice(BaseProvider):
         :param kwargs: Keyword arguments.
         :return: Sequence or uncontained element randomly chosen from items.
         """
-        return self.__call__(*args, **kwargs)
+        pass
 
-    def __call__(
-        self,
-        items: t.Sequence[t.Any] | None,
-        length: int = 0,
-        unique: bool = False,
-    ) -> t.Sequence[t.Any] | t.Any:
+    def __call__(self, items: t.Sequence[t.Any] | None, length: int=0, unique: bool=False) -> t.Sequence[t.Any] | t.Any:
         """Generates a randomly chosen sequence or bare element from a sequence.
 
         Provide elements randomly chosen from the elements in a sequence
@@ -59,31 +51,22 @@ class Choice(BaseProvider):
         'cdba'
 
         """
-
         if not isinstance(items, t.Sequence):
-            raise TypeError("**items** must be non-empty sequence.")
-
+            raise TypeError('**items** must be non-empty sequence.')
         if not items:
-            raise ValueError("**items** must be a non-empty sequence.")
-
+            raise ValueError('**items** must be a non-empty sequence.')
         if length < 0:
-            raise ValueError("**length** should be a positive integer.")
-
+            raise ValueError('**length** should be a positive integer.')
         if length == 0:
             return self.random.choice(items)
-
         if unique and len(set(items)) < length:
-            raise ValueError(
-                "There are not enough unique elements in "
-                "**items** to provide the specified **number**."
-            )
+            raise ValueError('There are not enough unique elements in **items** to provide the specified **number**.')
         if unique:
             data: list[str] = self.random.sample(list(set(items)), k=length)
         else:
             data = self.random.choices(items, k=length)
-
         if isinstance(items, list):
             return data
         elif isinstance(items, tuple):
             return tuple(data)
-        return "".join(data)
+        return ''.join(data)
